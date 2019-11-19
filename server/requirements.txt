@@ -1,0 +1,9 @@
+Flask
+flask-cors
+flask_jwt_extended
+bcrypt
+psycopg2
+gunicorn
+gevent
+
+flask-socketio
