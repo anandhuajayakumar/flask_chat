@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,12 @@ export class SocketService {
   private socket;
 
   constructor() {
-    // this.socket = io('/test');
-    this.socket = io('localhost:5000'); // i tried this
-    // this.socket = io(`/api`); // i also tried this
-
+    this.socket = io(environment.serverUrl);
+    this.socket.on('connect', () => {
+      this.socket.emit('my event', {
+        data: 'User Connected'
+      });
+    });
   }
 
   public sendMessage(message) {
@@ -21,7 +24,7 @@ export class SocketService {
 
   public getMessages = () => {
     return Observable.create(observer => {
-      this.socket.on('new-message', message => {
+      this.socket.on('response', message => {
         observer.next(message);
       });
     });

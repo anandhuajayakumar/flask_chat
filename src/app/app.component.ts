@@ -11,9 +11,19 @@ export class AppComponent implements OnInit {
 
   constructor(
     private socket: SocketService
-  ) { }
+  ) {
+    this.socket.getMessages().subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+  }
 
   ngOnInit() {
-    this.socket.sendMessage('a');
+    this.socket.sendMessage({
+      content: 'aaa',
+      user: '1',
+      chat: 'main'
+    });
   }
 }
