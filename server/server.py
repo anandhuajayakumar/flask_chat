@@ -1,12 +1,6 @@
 from modules import createApp
-app = createApp()
 
-# @app.route('/')
-# def hello_world():
-#     return jsonify({
-#         "Title": "Success"
-#     })
-
+(socketio, app) = createApp()
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    socketio.run(app, debug=True, host="0.0.0.0")

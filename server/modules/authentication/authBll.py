@@ -37,3 +37,9 @@ def verifyToken():
     return jsonify({
         "title": 'Success'
     })
+
+@auth.route('/api/healthCheck', methods = ['GET'])
+def healthCheck():
+    return jsonify({
+        "title": 'Success'
+    })
